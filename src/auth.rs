@@ -1,7 +1,7 @@
-use async_trait::async_trait;
-use serde::{Deserialize, Serialize};
 use crate::config::Config;
 use crate::spotify_error::Result;
+use async_trait::async_trait;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, Default, Clone)]
 pub struct AuthResponse {
