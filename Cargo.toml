@@ -1,0 +1,23 @@
+[package]
+name = "discover-weekly"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = { version = "4"}
+log = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+env_logger = "0.10"
+tokio = { version = "1.26", features = ["full"] }
+awc = { version = "3.1.1", features = ["openssl"] }
+serde_json = "1.0"
+base64 = "0.21"
+thiserror = "1.0"
+async-std = "1.12"
+async-trait = "0.1"
+actix-http = "3.3.1"
+openssl = "0.10"
+redis = {version = "*", features = ["async-std-comp"]}
+urlencoding = "*"
+chrono = "*"
+dotenv = "0.15.0"
