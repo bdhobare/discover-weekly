@@ -73,7 +73,7 @@ impl SpotifyClient {
         let params = [
             ("grant_type", "authorization_code"),
             ("code", &code.code.clone().unwrap_or_default()),
-            ("redirect_uri", &config.redirect_uri),
+            ("redirect_uri", &config.callback_url),
         ];
         let client_id = &config.spotify_client_id.to_string();
         let client_secret = &config.spotify_client_secret;

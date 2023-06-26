@@ -1,3 +1,4 @@
+use actix_web::web::Redirect;
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use discover_weekly::auth::{AuthResponse, FetchToken, TokenResponse};
 use discover_weekly::config::{Config, ConfigProvider, DotEnvConfigProvider};
@@ -49,8 +50,13 @@ async fn callback(data: web::Data<AppState>, response: web::Query<AuthResponse>)
     }
 }
 #[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Discover Weekly!")
+async fn index(data: web::Data<AppState>) -> impl Responder {
+    let callback_url = &data.config_provider.get_config().callback_url;
+    let client_id = &data.config_provider.get_config().spotify_client_id;
+    let redirect_url = "https://accounts.spotify.com/authorize?client_id=".to_owned()
+        + client_id +"&response_type=code&redirect_uri=" + callback_url
+        + "&scope=playlist-read-private playlist-modify-private user-read-recently-played&show_dialog=false";
+    Redirect::to(redirect_url)
 }
 
 #[actix_web::main]
@@ -60,6 +66,7 @@ async fn main() -> std::io::Result<()> {
     assert!(args.len() > 2, "cargo run -- <HOST> <PORT>");
     let bind_address: &str = &args[1];
     let bind_port: u16 = args[2].parse().unwrap();
+    info!("Open: {}:{}", bind_address, bind_port);
     HttpServer::new(|| {
         App::new()
             .app_data(web::Data::new(AppState {

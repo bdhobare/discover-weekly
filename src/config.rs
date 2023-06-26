@@ -1,6 +1,7 @@
 #[derive(Debug, Default)]
 pub struct Config {
-    pub redirect_uri: String,
+    pub home_uri: String,
+    pub callback_url: String,
     pub auth_uri: String,
     pub base_url: String,
     pub discover_playlist: String,
@@ -24,7 +25,8 @@ impl DotEnvConfigProvider {
         use std::env;
         dotenv().ok();
         let config = Config {
-            redirect_uri: env::var("REDIRECT_URI").expect("Missing redirect uri"),
+            home_uri: env::var("HOME_URI").expect("Missing redirect uri"),
+            callback_url: env::var("CALLBACK_URL").expect("Missing callback url"),
             auth_uri: env::var("AUTH_URI").expect("Missing auth uri"),
             base_url: env::var("BASE_URL").expect("Missing base uri"),
             discover_playlist: env::var("DISCOVER_PLAYLIST").expect("Missing discover playlist"),
