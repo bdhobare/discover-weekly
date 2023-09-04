@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 #[derive(Debug, Default)]
 pub struct Config {
     pub home_uri: String,
@@ -52,5 +54,54 @@ impl ConfigProvider for DotEnvConfigProvider {
 impl Default for DotEnvConfigProvider {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+pub struct CmdConfigProvider(Config);
+
+impl CmdConfigProvider {
+    pub fn new(args: HashMap<String, Vec<String>>) -> Self {
+        let home_uri: Vec<String> = args.get("home_uri").unwrap().to_vec();
+        let config = Config {
+            home_uri: home_uri.first().unwrap().to_string(),
+            ..Default::default()
+        };
+        CmdConfigProvider(config)
+    }
+}
+
+impl ConfigProvider for CmdConfigProvider {
+    fn get_config(&self) -> &Config {
+        &self.0
+    }
+}
+
+impl Default for CmdConfigProvider {
+    fn default() -> Self {
+        Self::new(HashMap::new())
+    }
+}
+
+pub struct EnvVarProvider(Config);
+
+impl EnvVarProvider {
+    pub fn new(args: HashMap<String, String>) -> Self {
+        let config = Config {
+            home_uri: args.get("HOME_URI").unwrap().to_string(),
+            ..Default::default()
+        };
+        EnvVarProvider(config)
+    }
+}
+
+impl ConfigProvider for EnvVarProvider {
+    fn get_config(&self) -> &Config {
+        &self.0
+    }
+}
+
+impl Default for EnvVarProvider {
+    fn default() -> Self {
+        Self::new(HashMap::new())
     }
 }

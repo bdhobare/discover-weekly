@@ -1,7 +1,9 @@
 use actix_web::web::Redirect;
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use discover_weekly::auth::{AuthResponse, FetchToken, TokenResponse};
-use discover_weekly::config::{Config, ConfigProvider, DotEnvConfigProvider};
+use discover_weekly::config::{
+    CmdConfigProvider, Config, ConfigProvider, DotEnvConfigProvider, EnvVarProvider,
+};
 use discover_weekly::spotify::SpotifyClient;
 use discover_weekly::spotify_error::Result;
 use discover_weekly::store::Store;
@@ -64,6 +66,9 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let args: Vec<String> = env::args().collect();
     assert!(args.len() > 2, "cargo run -- <HOST> <PORT>");
+    let (args, argv) = argmap::parse(env::args());
+    let _env_config_provider = EnvVarProvider::new(env::vars().collect());
+    let _cmd_config_provider = CmdConfigProvider::new(argv);
     let bind_address: &str = &args[1];
     let bind_port: u16 = args[2].parse().unwrap();
     info!("Open: {}:{}", bind_address, bind_port);

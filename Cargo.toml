@@ -21,3 +21,4 @@ redis = {version = "*", features = ["async-std-comp"]}
 urlencoding = "*"
 chrono = "*"
 dotenv = "0.15.0"
+argmap = "*"
