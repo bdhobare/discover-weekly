@@ -22,23 +22,23 @@ pub trait ConfigProvider {
 pub struct DotEnvConfigProvider(Config);
 
 impl DotEnvConfigProvider {
+
     pub fn new() -> Self {
         use dotenv::dotenv;
         use std::env;
         dotenv().ok();
         let config = Config {
-            home_uri: env::var("HOME_URI").expect("Missing redirect uri"),
-            callback_url: env::var("CALLBACK_URL").expect("Missing callback url"),
-            auth_uri: env::var("AUTH_URI").expect("Missing auth uri"),
-            base_url: env::var("BASE_URL").expect("Missing base uri"),
-            discover_playlist: env::var("DISCOVER_PLAYLIST").expect("Missing discover playlist"),
-            spotify_client_id: env::var("SPOTIFY_CLIENT_ID").expect("Missing spotify client id"),
-            spotify_client_secret: env::var("SPOTIFY_CLIENT_SECRET")
-                .expect("Missing spotify client secret"),
-            redis_url: env::var("REDIS_URL").expect("Missing redis uri"),
-            redis_port: env::var("REDIS_PORT").expect("Missing redis port"),
-            redis_db: env::var("REDIS_DB").expect("Missing redis db"),
-            redis_password: env::var("REDIS_PASSWORD").expect("Missing redis password"),
+            home_uri: env::var("HOME_URI").expect("Missing config"),
+            callback_url: env::var("CALLBACK_URL").expect("Missing config"),
+            auth_uri: env::var("AUTH_URI").expect("Missing config"),
+            base_url: env::var("BASE_URL").expect("Missing config"),
+            discover_playlist: env::var("DISCOVER_PLAYLIST").expect("Missing config"),
+            spotify_client_id: env::var("SPOTIFY_CLIENT_ID").expect("Missing config"),
+            spotify_client_secret: env::var("SPOTIFY_CLIENT_SECRET").expect("Missing config"),
+            redis_url: env::var("REDIS_URL").expect("Missing config"),
+            redis_port: env::var("REDIS_PORT").expect("Missing config"),
+            redis_db: env::var("REDIS_DB").expect("Missing config"),
+            redis_password: env::var("REDIS_PASSWORD").expect("Missing config"),
         };
 
         DotEnvConfigProvider(config)
@@ -60,10 +60,16 @@ impl Default for DotEnvConfigProvider {
 pub struct CmdConfigProvider(Config);
 
 impl CmdConfigProvider {
-    pub fn new(args: HashMap<String, Vec<String>>) -> Self {
-        let home_uri: Vec<String> = args.get("home_uri").unwrap().to_vec();
+    pub fn new(args: Vec<String>, argv: HashMap<String, Vec<String>>) -> Self {
+        let db_name = args.iter().nth(1).expect("Missing config");
+        let db_password = args.iter().nth(2).expect("Missing config");
+        let home_uri = argv.get("home_uri").expect("Missing config").to_vec();
+        let client_id = argv.get("client_id").expect("Missing config").to_vec();
         let config = Config {
-            home_uri: home_uri.first().unwrap().to_string(),
+            home_uri: db_name.to_string(),
+            callback_url: db_password.to_string(),
+            auth_uri: home_uri.first().expect("Missing config").to_string(),
+            base_url: client_id.first().expect("Missing config").to_string(),
             ..Default::default()
         };
         CmdConfigProvider(config)
@@ -78,7 +84,7 @@ impl ConfigProvider for CmdConfigProvider {
 
 impl Default for CmdConfigProvider {
     fn default() -> Self {
-        Self::new(HashMap::new())
+        Self::new(Vec::new(), HashMap::new())
     }
 }
 
@@ -87,7 +93,6 @@ pub struct EnvVarProvider(Config);
 impl EnvVarProvider {
     pub fn new(args: HashMap<String, String>) -> Self {
         let config = Config {
-            home_uri: args.get("HOME_URI").unwrap().to_string(),
             ..Default::default()
         };
         EnvVarProvider(config)

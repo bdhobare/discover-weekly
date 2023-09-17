@@ -116,4 +116,25 @@ impl SpotifyClient {
             "Error fetching playlist".into(),
         ))
     }
+    pub async fn get_or_create_archive_playlist(self, config: &Config, bearer: &str) -> Result<Playlist> {
+        let base_url = &config.base_url;
+        let uri = base_url.to_owned() + "/me/playlists?limit=50";
+        let mut ssl_builder = SslConnector::builder(SslMethod::tls()).unwrap();
+        ssl_builder.set_verify(SslVerifyMode::NONE);
+        let client = awc::Client::builder()
+            .connector(Connector::new().openssl(ssl_builder.build()))
+            .finish();
+        let mut response = client
+            .get(uri)
+            .insert_header(("Authorization", "Bearer ".to_owned() + bearer))
+            .send()
+            .await?;
+        let json = response.json::<serde_json::Value>().await?;
+        if let Ok(playlist) = serde_json::from_value::<Playlist>(json) {
+            return Ok(playlist);
+        }
+        Err(SpotifyError::CantFetchPlaylist(
+            "Error fetching playlist".into(),
+        ))
+    }
 }

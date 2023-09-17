@@ -66,9 +66,10 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let args: Vec<String> = env::args().collect();
     assert!(args.len() > 2, "cargo run -- <HOST> <PORT>");
-    let (args, argv) = argmap::parse(env::args());
+    let (args1, argv) = argmap::parse(env::args());
     let _env_config_provider = EnvVarProvider::new(env::vars().collect());
-    let _cmd_config_provider = CmdConfigProvider::new(argv);
+    let _cmd_config_provider = CmdConfigProvider::new(args1, argv);
+    test_method(_cmd_config_provider);
     let bind_address: &str = &args[1];
     let bind_port: u16 = args[2].parse().unwrap();
     info!("Open: {}:{}", bind_address, bind_port);
@@ -92,6 +93,11 @@ pub async fn get_access_token<'a>(
 ) -> Result<TokenResponse> {
     let response = client.fetch_token(config, code).await?;
     Ok(response)
+}
+fn test_method<T>(config_provider: T)
+    where T: ConfigProvider
+{
+    let db_name = config_provider.get_config().db_name;
 }
 
 #[cfg(test)]
