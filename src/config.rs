@@ -22,7 +22,6 @@ pub trait ConfigProvider {
 pub struct DotEnvConfigProvider(Config);
 
 impl DotEnvConfigProvider {
-
     pub fn new() -> Self {
         use dotenv::dotenv;
         use std::env;
@@ -61,8 +60,8 @@ pub struct CmdConfigProvider(Config);
 
 impl CmdConfigProvider {
     pub fn new(args: Vec<String>, argv: HashMap<String, Vec<String>>) -> Self {
-        let db_name = args.iter().nth(1).expect("Missing config");
-        let db_password = args.iter().nth(2).expect("Missing config");
+        let db_name = args.get(1).expect("Missing config");
+        let db_password = args.get(2).expect("Missing config");
         let home_uri = argv.get("home_uri").expect("Missing config").to_vec();
         let client_id = argv.get("client_id").expect("Missing config").to_vec();
         let config = Config {
@@ -91,7 +90,7 @@ impl Default for CmdConfigProvider {
 pub struct EnvVarProvider(Config);
 
 impl EnvVarProvider {
-    pub fn new(args: HashMap<String, String>) -> Self {
+    pub fn new(_args: HashMap<String, String>) -> Self {
         let config = Config {
             ..Default::default()
         };
