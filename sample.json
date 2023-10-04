@@ -1,0 +1,252 @@
+{
+    "id": "37i9dQZEVXcBWKkqzRzenz",
+    "uri": "spotify:playlist:37i9dQZEVXcBWKkqzRzenz",
+    "name": "Discover Weekly",
+    "description": "Your weekly mixtape of fresh music. Enjoy new music and deep cuts picked for you. Updates every Monday.",
+    "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZEVXcBWKkqzRzenz/tracks?offset=0&limit=100",
+        "items": [
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "7IiLsCv7fvoqnZ95NPfRsw",
+                    "name": "Leave The Water Still",
+                    "uri": "spotify:track:7IiLsCv7fvoqnZ95NPfRsw"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "7eXIQjn66MGgQsPIwkooqR",
+                    "name": "We Don't Talk",
+                    "uri": "spotify:track:7eXIQjn66MGgQsPIwkooqR"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "60O5TDZ9AbLQf3m44Xzq9C",
+                    "name": "Shiloh",
+                    "uri": "spotify:track:60O5TDZ9AbLQf3m44Xzq9C"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "4FPTwDfFHaPgLP6ACaqgpr",
+                    "name": "Jakarta",
+                    "uri": "spotify:track:4FPTwDfFHaPgLP6ACaqgpr"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "5FK9E2XwYMx8Bhw3mQ7eGy",
+                    "name": "More",
+                    "uri": "spotify:track:5FK9E2XwYMx8Bhw3mQ7eGy"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "2WbFll5FxW0JEKIyijHNcb",
+                    "name": "Midnatt",
+                    "uri": "spotify:track:2WbFll5FxW0JEKIyijHNcb"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "6XY3Jr2kZDGVsMxsQn8uhw",
+                    "name": "Take It Home",
+                    "uri": "spotify:track:6XY3Jr2kZDGVsMxsQn8uhw"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "3gKhxGGUsproAWrYTFAyTX",
+                    "name": "Potions",
+                    "uri": "spotify:track:3gKhxGGUsproAWrYTFAyTX"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "0bk5Cch52RjA3SbWk5JsVu",
+                    "name": "UknoIknoUkno",
+                    "uri": "spotify:track:0bk5Cch52RjA3SbWk5JsVu"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "3LCXApiAIIvSzM03Aemhoi",
+                    "name": "Denise, Don’t Wanna See You Cry",
+                    "uri": "spotify:track:3LCXApiAIIvSzM03Aemhoi"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "2P15tzIexPvQsZCDZBaBzs",
+                    "name": "Feedback",
+                    "uri": "spotify:track:2P15tzIexPvQsZCDZBaBzs"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "3V3a55c5VdygC1lDOiOQbx",
+                    "name": "Asking Right",
+                    "uri": "spotify:track:3V3a55c5VdygC1lDOiOQbx"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "4cmc0AUXPBEpCY2IjhtVgg",
+                    "name": "Heavenly Father (Bon Iver)",
+                    "uri": "spotify:track:4cmc0AUXPBEpCY2IjhtVgg"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "0BpKvuvo3rBeypmTxsPShE",
+                    "name": "Ad Space",
+                    "uri": "spotify:track:0BpKvuvo3rBeypmTxsPShE"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "0X3QtyIJf8pC8wfbbRgNt5",
+                    "name": "Over Tage",
+                    "uri": "spotify:track:0X3QtyIJf8pC8wfbbRgNt5"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "1PiT4AuopBXRBvLIZk48BO",
+                    "name": "anotherlife",
+                    "uri": "spotify:track:1PiT4AuopBXRBvLIZk48BO"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "2KsuXBerIFkr9Ef8DJioTk",
+                    "name": "Thanks",
+                    "uri": "spotify:track:2KsuXBerIFkr9Ef8DJioTk"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "1RxTyElARYb3bzwnp51oNJ",
+                    "name": "Don't Call Her Over To You",
+                    "uri": "spotify:track:1RxTyElARYb3bzwnp51oNJ"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "5hgH4lqrKXSzauHoUiJV3q",
+                    "name": "River Day",
+                    "uri": "spotify:track:5hgH4lqrKXSzauHoUiJV3q"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "15oqkxMUZc8vrA7D2aV81v",
+                    "name": "Blue",
+                    "uri": "spotify:track:15oqkxMUZc8vrA7D2aV81v"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "7svBeBw3WFTv49xvaMeCm2",
+                    "name": "Make It Better",
+                    "uri": "spotify:track:7svBeBw3WFTv49xvaMeCm2"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "5s5s4tsN7u0oqQH5HaQYPA",
+                    "name": "Our Park By Night - Mixed",
+                    "uri": "spotify:track:5s5s4tsN7u0oqQH5HaQYPA"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "3CSgGrcAGMr0sfhNRQkhJk",
+                    "name": "Ignorancy",
+                    "uri": "spotify:track:3CSgGrcAGMr0sfhNRQkhJk"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "2hYZL212p2hBy5imoFq8FN",
+                    "name": "Godzilla",
+                    "uri": "spotify:track:2hYZL212p2hBy5imoFq8FN"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "37DpYxKAtHhvgYkMxruiPx",
+                    "name": "Good For Now (feat. Lucky Daye)",
+                    "uri": "spotify:track:37DpYxKAtHhvgYkMxruiPx"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "2KFmVlSxIzaGatl3lWTBie",
+                    "name": "sus (summer of innocence edit)",
+                    "uri": "spotify:track:2KFmVlSxIzaGatl3lWTBie"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "4TpieFNc0ietVb1ictUco1",
+                    "name": "Coastline",
+                    "uri": "spotify:track:4TpieFNc0ietVb1ictUco1"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "6o3SJNUuC9yEkR3IC15t2P",
+                    "name": "Space Intention",
+                    "uri": "spotify:track:6o3SJNUuC9yEkR3IC15t2P"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "3BGrvXWSNmnY9LAXxf5bqW",
+                    "name": "Long Summer Nights",
+                    "uri": "spotify:track:3BGrvXWSNmnY9LAXxf5bqW"
+                }
+            },
+            {
+                "added_at": "2023-09-24T23:00:00Z",
+                "track": {
+                    "id": "6bPgbVUEcKHd2Ar8ZoTZTZ",
+                    "name": "Det Bästa Vi Har",
+                    "uri": "spotify:track:6bPgbVUEcKHd2Ar8ZoTZTZ"
+                }
+            }
+        ],
+        "total": 30
+    }
+}
