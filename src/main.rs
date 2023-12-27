@@ -16,23 +16,23 @@ async fn callback(data: web::Data<AppState>, response: web::Query<AuthResponse>)
     let auth_response = response.into_inner();
     let app_data = data.into_inner();
     let config_provider = &app_data.config_provider;
-    let app_config = config_provider.get_config();
+    let app_config = config_provider.config();
     if let Some(_code) = &auth_response.code {
         // User approved request,
         info!("Code successfully fetched");
         let auth_client = AuthClient;
         let auth_info = auth_client.fetch_token(app_config, &auth_response).await;
-        match auth_info {
+        return match auth_info {
             Ok(token_response) => {
                 let spotify_client = SpotifyClient::new(token_response.clone());
                 let store = Store::open(app_config).await;
                 let _ = store.unwrap().store_access_tokens(&token_response).await;
                 let playlist = spotify_client
-                    .get_discovery_weekly_playlist(app_config)
+                    .discovery_weekly_playlist(app_config)
                     .await;
-                return HttpResponse::Ok().body(serde_json::to_string(&playlist.unwrap()).unwrap());
+                HttpResponse::Ok().body(serde_json::to_string(&playlist.unwrap()).unwrap())
             }
-            Err(err) => return HttpResponse::Ok().body(err.to_string()),
+            Err(err) => HttpResponse::Ok().body(err.to_string())
         }
     }
     // Error occurred or user denied request
@@ -42,8 +42,8 @@ async fn callback(data: web::Data<AppState>, response: web::Query<AuthResponse>)
 }
 #[get("/")]
 async fn index(data: web::Data<AppState>) -> impl Responder {
-    let callback_url = &data.config_provider.get_config().callback_url;
-    let client_id = &data.config_provider.get_config().spotify_client_id;
+    let callback_url = &data.config_provider.config().callback_url;
+    let client_id = &data.config_provider.config().spotify_client_id;
     let redirect_url = "https://accounts.spotify.com/authorize?client_id=".to_owned()
         + client_id +"&response_type=code&redirect_uri=" + callback_url
         + "&scope=playlist-read-private playlist-modify-private user-read-recently-played&show_dialog=false";
@@ -101,7 +101,7 @@ mod tests {
 
     struct MockConfigProvider(Config);
     impl ConfigProvider for MockConfigProvider {
-        fn get_config(&self) -> &Config {
+        fn config(&self) -> &Config {
             &self.0
         }
     }
@@ -117,7 +117,7 @@ mod tests {
         let client = MockClient {};
         let auth_response = AuthResponse::default();
         let config_provider = MockConfigProvider::default();
-        let config = config_provider.get_config();
+        let config = config_provider.config();
         let test_response = async_std::task::block_on(client.fetch_token(config, &auth_response));
         assert!(test_response.is_ok());
         let token = test_response.unwrap().access_token;

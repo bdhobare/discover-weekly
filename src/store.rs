@@ -14,7 +14,7 @@ pub struct Store {
 
 impl Store {
     pub async fn open(config: &Config) -> Result<Store> {
-        let client = redis::Client::open(Store::get_connection_info(
+        let client = redis::Client::open(Store::connection_info(
             &config.redis_password,
             &config.redis_url,
             &config.redis_port,
@@ -36,7 +36,7 @@ impl Store {
             .await?;
         Ok(())
     }
-    pub async fn get_token_response(self) -> Result<(TokenResponse, String)> {
+    pub async fn token_response(self) -> Result<(TokenResponse, String)> {
         let mut guard = self.con.lock().await;
         let tokens: Option<String> = guard.get(self.redis_key).await?;
         let _insert_time: Option<String> = guard.get(self.insert_time_key).await?;
@@ -48,7 +48,7 @@ impl Store {
             msg: "Missing value".to_string().into(),
         })
     }
-    fn get_connection_info(
+    fn connection_info(
         redis_password: &str,
         redis_host: &str,
         redis_port: &str,

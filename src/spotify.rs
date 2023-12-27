@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use crate::auth::TokenResponse;
 use crate::config::Config;
 use crate::spotify_error::{Result, SpotifyError};
@@ -33,6 +34,33 @@ pub struct Playlist {
     tracks: PlaylistTrackItem,
 }
 
+struct Playlists {
+    playlists: <Vec<Playlist> as IntoIterator>::IntoIter,
+    client: reqwest::blocking::Client,
+    limit: u32,
+    offset: u32,
+    next: String,
+    previous: String,
+    total: u32
+}
+
+impl Playlists {
+    fn new() -> Result<Self> {
+        Ok(Playlists{
+            playlists: vec![].into_iter(),
+            client: reqwest::blocking::Client::new(),
+            limit: 50,
+            offset: 0,
+            next: "".to_owned(),
+            previous: "".to_owned(),
+            total: 0
+        })
+    }
+    fn try_next(&mut self) -> Result<Option<Playlist>> {
+
+    }
+}
+
 #[derive(Clone)]
 pub struct SpotifyClient {
     auth_info: TokenResponse,
@@ -45,7 +73,7 @@ impl SpotifyClient {
         }
     }
 
-    async fn get<T>(&self, uri: &str) -> Result<T>
+    async fn get<T>(&self, mut uri: String, query_params: HashMap<&str, i32>) -> Result<T>
     where
         T: for<'de> serde::Deserialize<'de>,
     {
@@ -54,6 +82,12 @@ impl SpotifyClient {
         let client = awc::Client::builder()
             .connector(Connector::new().openssl(ssl_builder.build()))
             .finish();
+        let mut params = "?".to_owned();
+        for (key, value) in query_params {
+            params.push_str(&format!("{key}={value}&"));
+        }
+        params.pop(); // Remove last & or ?
+        uri.push_str(&params);
         let mut response = client
             .get(uri)
             .insert_header((
@@ -68,14 +102,20 @@ impl SpotifyClient {
         }
         Err(SpotifyError::Unknown { msg: None })
     }
-    pub async fn get_discovery_weekly_playlist(&self, config: &Config) -> Result<Playlist> {
+    pub async fn discovery_weekly_playlist(&self, config: &Config) -> Result<Playlist> {
+        let query_params = HashMap::from([
+            ("limit", 50)
+        ]);
         let base_url = &config.base_url;
         let uri = base_url.to_owned() + "/playlists/" + &config.discover_playlist;
-        self.get::<Playlist>(&uri).await
+        self.get::<Playlist>(uri, query_params).await
     }
     pub async fn get_or_create_archive_playlist(&self, config: &Config) -> Result<Playlist> {
         let base_url = &config.base_url;
-        let uri = base_url.to_owned() + "/me/playlists?limit=50";
-        self.get::<Playlist>(&uri).await
+        let query_params = HashMap::from([
+            ("limit", 50)
+        ]);
+        let uri = base_url.to_owned() + "/me/playlists";
+        self.get::<Playlist>(uri, query_params).await
     }
 }
