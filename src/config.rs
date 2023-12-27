@@ -16,7 +16,7 @@ pub struct Config {
 }
 
 pub trait ConfigProvider {
-    fn get_config(&self) -> &Config;
+    fn config(&self) -> &Config;
 }
 
 pub struct DotEnvConfigProvider(Config);
@@ -45,7 +45,7 @@ impl DotEnvConfigProvider {
 }
 
 impl ConfigProvider for DotEnvConfigProvider {
-    fn get_config(&self) -> &Config {
+    fn config(&self) -> &Config {
         &self.0
     }
 }
@@ -76,7 +76,7 @@ impl CmdConfigProvider {
 }
 
 impl ConfigProvider for CmdConfigProvider {
-    fn get_config(&self) -> &Config {
+    fn config(&self) -> &Config {
         &self.0
     }
 }
@@ -99,7 +99,7 @@ impl EnvVarProvider {
 }
 
 impl ConfigProvider for EnvVarProvider {
-    fn get_config(&self) -> &Config {
+    fn config(&self) -> &Config {
         &self.0
     }
 }
